@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "model": {
+    "vocab_size": 50257,
+    "n_positions": 512,
+    "n_embd": 768,
+    "n_layer": 12,
+    "n_head": 12
+  },
+  "training": {
+    "gradient_accumulation_steps": 4,
+    "learning_rate": 5e-4,
+    "weight_decay": 0.01,
+    "max_steps": 50000,
+    "warmup_steps": 1000
+  }
+}
