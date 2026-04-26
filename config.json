@@ -7,7 +7,8 @@
   },
   "tokenizer": {
     "vocab_size": 50257,
-    "unk_token": "<|unk|>"
+    "unk_token": "<|unk|>",
+    "pad_token": "<|pad|>"
   },
   "model": {
     "vocab_size": 50257,

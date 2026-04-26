@@ -91,13 +91,11 @@ if tokenized_dataset is None:
   print("Dataset tokenized")
 print("Tokenized dataset loaded")
 
-
 fast_tokenizer = PreTrainedTokenizerFast(
   tokenizer_object=tokenizer,
   clean_up_tokenization_spaces=True
 )
-fast_tokenizer.pad_token = fast_tokenizer.eos_token
-
+fast_tokenizer.add_special_tokens({"pad_token": config["tokenizer"]["pad_token"]})
 
 training_args = TrainingArguments(
   output_dir=OUTPUT_DIR,
