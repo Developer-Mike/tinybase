@@ -9,12 +9,12 @@ parser.add_argument("--length", type=int, default=100)
 args = parser.parse_args()
 
 tokenizer = AutoTokenizer.from_pretrained("gpt2")
-model = GPT2LMHeadModel.from_pretrained(args.model_path)
+model = GPT2LMHeadModel.from_pretrained(args.m)
 model.to("cuda") # type: ignore
 model.eval()
 
 tokenized_input = tokenizer.encode(args.prompt, return_tensors="pt")
-tokenized_input.to("cuda")
+tokenized_input = tokenized_input.to("cuda")
 
 with torch.no_grad():
   output = model.generate( # type: ignore

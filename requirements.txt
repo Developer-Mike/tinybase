@@ -4,3 +4,4 @@ torchaudio
 transformers
 datasets
 accelerate
+tokenizers
