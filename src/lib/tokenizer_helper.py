@@ -1,5 +1,6 @@
 import os
 import tokenizers
+import transformers
 
 def try_load_tokenizer(dir: str) -> tokenizers.Tokenizer | None:
   if os.path.exists(dir):
@@ -17,3 +18,12 @@ def train_tokenizer(data: list[str], vocab_size: int, unk_token: str) -> tokeniz
 
   tokenizer.train_from_iterator(data, trainer=trainer)
   return tokenizer
+
+def get_fast_tokenizer(tokenizer: tokenizers.Tokenizer, pad_token: str) -> transformers.PreTrainedTokenizerFast:
+    fast_tokenizer = transformers.PreTrainedTokenizerFast(
+      tokenizer_object=tokenizer,
+      clean_up_tokenization_spaces=True
+    )
+    fast_tokenizer.add_special_tokens({"pad_token": pad_token})
+    
+    return fast_tokenizer

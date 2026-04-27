@@ -1,34 +1,11 @@
 import os
 import re
 import glob
-import json
+from assets import config, OUTPUT_DIR, TOKENIZER_FILE, TOKENIZED_DATASET_DIR
 from lib import dataset_helper
 from lib import tokenizer_helper
-from transformers import GPT2Config, GPT2LMHeadModel, Trainer, TrainingArguments, DataCollatorForLanguageModeling, PreTrainedTokenizerFast
+from transformers import GPT2Config, GPT2LMHeadModel, Trainer, TrainingArguments, DataCollatorForLanguageModeling
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATASETS_DIR = os.path.join(BASE_DIR, "datasets")
-
-CONFIG_FILE = os.path.join(BASE_DIR, "config.json")
-with open(CONFIG_FILE, "r") as f:
-  config = json.load(f)
-
-OUTPUT_DIR = os.path.join(BASE_DIR, "out", config["version"])
-os.makedirs(OUTPUT_DIR, exist_ok=True)
-
-TOKENIZER_FILE = os.path.join(OUTPUT_DIR, "tokenizer.json")
-DATASET_DIR = dataset_helper.get_dataset_path(
-  DATASETS_DIR,
-  config["dataset"]["repo"],
-  config["dataset"]["variant"],
-  "train"
-)
-TOKENIZED_DATASET_DIR = dataset_helper.get_tokenized_dataset_path(
-  DATASETS_DIR,
-  config["dataset"]["repo"],
-  config["dataset"]["variant"],
-  "train"
-)
 checkpoints = sorted(
   glob.glob(os.path.join(OUTPUT_DIR, "checkpoint-*")),
   key=lambda x: int(re.findall(r"checkpoint-(\d+)", x)[0])
@@ -91,11 +68,7 @@ if tokenized_dataset is None:
   print("Dataset tokenized")
 print("Tokenized dataset loaded")
 
-fast_tokenizer = PreTrainedTokenizerFast(
-  tokenizer_object=tokenizer,
-  clean_up_tokenization_spaces=True
-)
-fast_tokenizer.add_special_tokens({"pad_token": config["tokenizer"]["pad_token"]})
+fast_tokenizer = tokenizer_helper.get_fast_tokenizer(tokenizer, config["tokenizer"]["pad_token"])
 
 training_args = TrainingArguments(
   output_dir=OUTPUT_DIR,

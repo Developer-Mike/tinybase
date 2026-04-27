@@ -3,15 +3,6 @@ import datasets
 import tokenizers
 from typing import cast
 
-def get_valid_dirname(name: str) -> str:
-  return "".join([c.lower() for c in name if c.isalnum()])
-
-def get_dataset_path(dir: str, repo: str, variant: str, split: str) -> str:
-  return os.path.join(dir, get_valid_dirname(repo), get_valid_dirname(variant), split, "raw")
-
-def get_tokenized_dataset_path(dir: str, repo: str, variant: str, split: str) -> str:
-  return os.path.join(dir, get_valid_dirname(repo), get_valid_dirname(variant), split, "tokenized")
-
 def load_dataset(dir: str, repo: str, variant: str, split: str) -> datasets.Dataset:
   return datasets.load_dataset(repo, variant, split=split, cache_dir=dir)
 
