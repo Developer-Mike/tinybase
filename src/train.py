@@ -1,7 +1,7 @@
 import os
 import re
 import glob
-from assets import config, OUTPUT_DIR, TOKENIZER_FILE, TOKENIZED_DATASET_DIR
+from assets import config, OUTPUT_DIR, TOKENIZER_FILE, DATASET_DIR, TOKENIZED_DATASET_DIR
 from lib import dataset_helper
 from lib import tokenizer_helper
 from transformers import GPT2Config, GPT2LMHeadModel, Trainer, TrainingArguments, DataCollatorForLanguageModeling
