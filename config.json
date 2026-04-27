@@ -1,5 +1,5 @@
 {
-  "version": "1.1",
+  "version": "1.2",
   "dataset": {
     "repo": "HuggingFaceFW/fineweb-edu",
     "variant": "sample-10BT",
@@ -7,6 +7,7 @@
   },
   "tokenizer": {
     "vocab_size": 50257,
+    "eos_token": "<|eos|>",
     "unk_token": "<|unk|>",
     "pad_token": "<|pad|>"
   },

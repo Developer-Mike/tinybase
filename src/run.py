@@ -11,7 +11,7 @@ parser.add_argument("--length", type=int, default=100)
 args = parser.parse_args()
 
 tokenizer = tokenizer_helper.try_load_tokenizer(TOKENIZER_FILE)
-fast_tokenizer = tokenizer_helper.get_fast_tokenizer(tokenizer, config["tokenizer"]["pad_token"])
+fast_tokenizer = tokenizer_helper.get_fast_tokenizer(tokenizer, config["tokenizer"]["eos_token"], config["tokenizer"]["unk_token"], config["tokenizer"]["pad_token"])
 
 model = GPT2LMHeadModel.from_pretrained(args.m)
 model.to("cuda") # type: ignore

@@ -68,7 +68,7 @@ if tokenized_dataset is None:
   print("Dataset tokenized")
 print("Tokenized dataset loaded")
 
-fast_tokenizer = tokenizer_helper.get_fast_tokenizer(tokenizer, config["tokenizer"]["pad_token"])
+fast_tokenizer = tokenizer_helper.get_fast_tokenizer(tokenizer, config["tokenizer"]["eos_token"], config["tokenizer"]["unk_token"], config["tokenizer"]["pad_token"])
 
 training_args = TrainingArguments(
   output_dir=OUTPUT_DIR,
