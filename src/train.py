@@ -54,7 +54,7 @@ tokenized_dataset = dataset_helper.try_load_tokenized_dataset(TOKENIZED_DATASET_
 if tokenized_dataset is None:
   print("Loading dataset...")
   dataset = dataset or dataset_helper.load_dataset(
-    DATASETS_DIR,
+    DATASET_DIR,
     config["dataset"]["repo"],
     config["dataset"]["variant"],
     "train"
@@ -72,7 +72,7 @@ fast_tokenizer = tokenizer_helper.get_fast_tokenizer(tokenizer, config["tokenize
 
 training_args = TrainingArguments(
   output_dir=OUTPUT_DIR,
-  per_device_train_batch_size=8,
+  per_device_train_batch_size=4,
   logging_steps=100, save_steps=1000,
   fp16=True, **config["training"]
 )

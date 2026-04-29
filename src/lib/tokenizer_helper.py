@@ -28,5 +28,5 @@ def get_fast_tokenizer(tokenizer: tokenizers.Tokenizer, eos_token: str, unk_toke
     unk_token=unk_token,
     pad_token=pad_token
   )
-    
+
   return fast_tokenizer

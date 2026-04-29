@@ -34,7 +34,7 @@ def densify_tokenized_dataset(dataset: datasets.Dataset, block_size: int) -> dat
     group_texts,
     batched=True,
     remove_columns=dataset.column_names,
-    num_proc=os.cpu_count()
+    num_proc=os.cpu_count() - 1
   )
 
 def tokenize_dataset(tokenizer: tokenizers.Tokenizer, data_column: str, dataset) -> datasets.Dataset:
@@ -50,7 +50,7 @@ def tokenize_dataset(tokenizer: tokenizers.Tokenizer, data_column: str, dataset)
     batch_tokenize,
     batched=True,
     remove_columns=dataset.column_names,
-    num_proc=os.cpu_count()
+    num_proc=os.cpu_count() - 1
   )
 
   return tokenized_dataset

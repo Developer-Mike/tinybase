@@ -17,13 +17,23 @@ model = GPT2LMHeadModel.from_pretrained(args.m)
 model.to("cuda") # type: ignore
 model.eval()
 
-tokenized_input = fast_tokenizer.encode(args.prompt, return_tensors="pt")
+tokenized_input = fast_tokenizer.encode(
+  args.prompt,
+  return_tensors="pt",
+  padding=True,
+  truncation=True
+)
 tokenized_input = tokenized_input.to("cuda")
+
+attention_mask = (tokenized_input != fast_tokenizer.pad_token_id).long()
+attention_mask = attention_mask.to("cuda")
 
 with torch.no_grad():
   output = model.generate( # type: ignore
     tokenized_input,
+    attention_mask=attention_mask,
     max_length=args.length,
+    pad_token_id=fast_tokenizer.eos_token_id,
     num_return_sequences=1,
     no_repeat_ngram_size=2,
     do_sample=True, top_k=50,
